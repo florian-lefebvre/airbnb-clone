@@ -1,2 +1,45 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= asset_url 'banner.jpg'%>);">
+  <div class="container">
+    <h1>Rent-a-car <strong>All the top car hire companies in one place</strong>!</h1>
+    <p>Book your car asap</p>
+    <a class="btn btn-primary" href="#">Search for a car</a>
+  </div>
+</div>
+
+<div class="cards">
+<div class="card" style="width: 18rem;">
+  <%= image_tag "white_car.jpg", class: "card-img-top", alt: "white car" %>
+  <div class="card-body">
+    <h5 class="card-title">Look for speed</h5>
+    <p class="card-text">Cancel or change most reservations for free up to 48 hours before pick-up.</p>
+    <a href="#" class="btn btn-primary">Rent-a-car</a>
+  </div>
+</div>
+
+   <div class="card" class="grid text-center" style="width: 18rem;">
+   <%= image_tag "comfort_car.jpg", class: "card-img-top", alt: "yellow car" %>
+  <div class="card-body">
+    <h5 class="card-title">Looking for comfort</h5>
+    <p class="card-text">Clean cars. Flexible bookings. Rental counters that observe social distance.</p>
+    <a href="#" class="btn btn-primary">Rent-a-car</a>
+  </div>
+</div>
+
+   <div class="card" style="width: 18rem;">
+   <%= image_tag "security_car.jpg", class: "card-img-top", alt: "black car" %>
+   <div class="card-body">
+    <h5 class="card-title">Looking for security</h5>
+    <p class="card-text">We are working with our partners to give you the security you need in your rental.</p>
+    <a href="#" class="btn btn-primary">Rent-a-car</a>
+  </div>
+</div>
+
+   <div class="card" style="width: 18rem;">
+   <%= image_tag "family_car.jpg", class: "card-img-top", alt: "family car" %>
+  <div class="card-body">
+    <h5 class="card-title">Looking for economy</h5>
+    <p class="card-text">Found the same offer at a lower price? We match the price.</p>
+    <a href="#" class="btn btn-primary">Rent-a-car</a>
+  </div>
+</div>
+</div>
