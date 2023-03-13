@@ -10,8 +10,7 @@
     <link rel="shortcut icon" href="<%= asset_url "logo.jpg" %>" type="image/jpeg">
   </head>
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <%= render "shared/flashes" %>
     <%= render "shared/navbar" %>
     <%= yield %>
     <%= render "shared/footer" %>
