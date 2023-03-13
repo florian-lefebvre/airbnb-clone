@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :cars
+  has_many :bookings
 
   def owner?
     !cars.empty?
