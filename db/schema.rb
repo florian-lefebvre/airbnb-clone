@@ -26,6 +26,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_163130) do
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
+
+
   create_table "cars", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.float "price"
