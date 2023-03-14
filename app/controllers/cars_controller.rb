@@ -1,7 +1,7 @@
 class CarsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index]
   before_action :set_user, only: %i[new create]
-  before_action :set_car, only: %i[show edit update]
+  before_action :set_car, only: %i[show edit update destroy]
 
   def index
     @cars = Car.all
@@ -30,6 +30,11 @@ class CarsController < ApplicationController
   def update
     @car.update(car_params)
     redirect_to car_path(@car)
+  end
+
+  def destroy
+    @car.destroy
+    redirect_to cars_path, status: :see_other
   end
 
   private
