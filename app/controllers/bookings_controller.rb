@@ -5,15 +5,18 @@ class BookingsController < ApplicationController
 
   def index
     @bookings = Booking.all
+    @bookings = policy_scope(Booking)
   end
 
   def show
+    authorize @booking
   end
-  
+
   def create
     @booking = Booking.new(booking_params)
     @booking.car = @car
     @booking.user = @user
+    authorize @booking
     if @booking.save
       redirect_to car_path(@car)
     else
