@@ -1,8 +1,14 @@
+<div class="container">
+
 <h1>All cars</h1>
 <% if @cars.empty? %>
   <div>No cars yet</div>
 <% else %>
-  <% @cars.each do |car| %>
-    <div><%= @car %></div>
-  <% end %>
+  <div class="row row-cols-4">
+    <% @cars.each do |car| %>
+      <%= render "cars/partial/card", car: %>
+    <% end %>
+  </div>
 <% end %>
+
+</div>
