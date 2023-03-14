@@ -1,3 +1,11 @@
-<h2><%= @car.price %></h2>
-<p><%= @car.year %></p>
-
+<div class="container">
+  <h1>Car details:</h1>
+  <h2><%= @car.price %></h2>
+  <p><%= @car.year %></p>
+  <% if policy(@car).edit? %>
+    <%= link_to "Edit a car", edit_car_path(@car), class: "btn btn-primary" %>
+  <% end %>
+  <% if policy(@car).destroy? %>
+    <%= link_to "Delete", car_path(@car), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-primary" %>
+  <% end %>
+</div>

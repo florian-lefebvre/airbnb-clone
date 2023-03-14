@@ -1,15 +1,24 @@
 <div class="container">
-
-<h1>All cars</h1>
   <%= link_to "New car", new_car_path(@car), class: "btn btn-primary" %>
-<% if @cars.empty? %>
-  <div>No cars yet</div>
-<% else %>
-  <div class="row row-cols-4">
-    <% @cars.each do |car| %>
-      <%= render "cars/partial/card", car: %>
-    <% end %>
-  </div>
-<% end %>
+
+  <% if @show_my_cars %>
+    <h2>My cars</h2>
+    <div class="row row-cols-4">
+      <% @my_cars.each do |car| %>
+        <%= render "cars/partial/card", car: %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <h2>All cars</h2>
+  <% if @cars.empty? %>
+    <div>No cars yet</div>
+  <% else %>
+    <div class="row row-cols-4">
+      <% @cars.each do |car| %>
+        <%= render "cars/partial/card", car: %>
+      <% end %>
+    </div>
+  <% end %>
 
 </div>
