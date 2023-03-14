@@ -1,19 +1,6 @@
 class CarsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index]
   before_action :set_user, only: %i[new create]
-<<<<<<< HEAD
-​
-  def index
-    @cars = Car.all
-  end
-​
-  def new
-    @car = Car.new
-  end
-​
-  def show
-    @car = Car.find(params[:id])
-=======
 
   def index
     @cars = Car.all
@@ -22,19 +9,10 @@ class CarsController < ApplicationController
   def new
     @car = Car.new
   end
-  
+
   def show
     @car = Car.find(params[:id])
   end
-
-  def create
-    @car = Car.new(car_params)
-    @car.user = @user
-    @car.save
-    redirect_to cars_path(@car)
->>>>>>> fcdb3562bb68e7a076f5d135841c858284a3915f
-  end
-​
 def create
   @car = Car.new(car_params)
   @car.user = @user
