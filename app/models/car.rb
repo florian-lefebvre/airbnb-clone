@@ -8,7 +8,7 @@ class Car < ApplicationRecord
   validates :user, presence: true
   validates :kilometers, presence: true
   validates :model, presence: true
-  validates :seat, presence: true
+  validates :seats, presence: true
   validates :color, presence: true
   validates :type, presence: true
 end
