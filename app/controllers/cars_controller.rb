@@ -1,6 +1,7 @@
 class CarsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index]
   before_action :set_user, only: %i[new create]
+  before_action :set_car, only: %i[show edit update destroy]
 
   def index
     @cars = Car.all
@@ -11,21 +12,44 @@ class CarsController < ApplicationController
   end
 
   def show
-    @car = Car.find(params[:id])
   end
-def create
-  @car = Car.new(car_params)
-  @car.user = @user
-  if @car.save
-    redirect_to cars_path(@car)
-  else
-    render :new
+
+  def create
+    @car = Car.new(car_params)
+    @car.user = @user
+    if @car.save
+      redirect_to car_path(@car)
+    else
+      render :new
+    end
   end
-end
+
+  def edit
+  end
+
+  def update
+    if @car.update(car_params)
+        redirect_to car_path(@car)
+    else
+        render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @car.destroy
+    redirect_to cars_path, status: :see_other
+  end
+
   private
+
   def set_user
     @user = current_user
   end
+
+  def set_car
+    @car = Car.find(params[:id])
+  end
+
   def car_params
     params.require(:car).permit(:price, :year)
   end
