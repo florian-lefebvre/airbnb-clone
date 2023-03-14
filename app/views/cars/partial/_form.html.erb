@@ -1,5 +1,12 @@
+<% creating = car.id.nil? %>
 <%= simple_form_for(car) do |f| %>
   <%= f.input :year %>
   <%= f.input :price %>
-  <%= f.submit "Save changes", class: "btn btn-primary" %>
+  <%= f.input :kilometers %>
+  <%= f.input :model %>
+  <%= f.input :seats %>
+  <%= f.input :car_type %>
+  <%= f.input :color %>
+  <%= f.input :photo, as: :file %>
+  <%= f.submit creating ? "Add new car" : "Save changes", class: "btn btn-primary" %>
 <% end %>
