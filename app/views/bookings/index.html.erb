@@ -1,0 +1,13 @@
+<h1>All Bookings</h1>
+<ul>
+  <% @bookings.each do |booking| %>
+    <li><%= link_to "Booking #{booking.id}", booking_path(booking) %>:
+      <ul>
+        <li>Start date: <%= booking.start_date %></li>
+        <li>End date: <%= booking.end_date %></li>
+        <li>User: <%= booking.user.first_name %></li>
+        <li>Car: <%= booking.car_id %></li>
+      </ul>
+    </li>
+  <% end %>
+</ul>
