@@ -1,0 +1,8 @@
+<h1>All cars</h1>
+<% if @cars.empty? %>
+  <div>No cars yet</div>
+<% else %>
+  <% @cars.each do |car| %>
+    <div><%= @car %></div>
+  <% end %>
+<% end %>
