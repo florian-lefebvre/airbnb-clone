@@ -1,0 +1,6 @@
+<h1>New Car</h1>
+<%= simple_form_for @car do |f| %>
+  <%= f.input :year %>
+  <%= f.input :price %>
+  <%= f.submit "Add new car", class: "btn btn-primary" %>
+<% end %>

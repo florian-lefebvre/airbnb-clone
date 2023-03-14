@@ -5,4 +5,5 @@
   <% @cars.each do |car| %>
     <div><%= @car %></div>
   <% end %>
+  <%= link_to "New car", new_car_path(@car) %>
 <% end %>
