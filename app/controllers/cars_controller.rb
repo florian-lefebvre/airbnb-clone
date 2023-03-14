@@ -1,12 +1,17 @@
 class CarsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index]
   before_action :set_user, only: %i[new create]
+
   def index
     @cars = Car.all
   end
 
   def new
     @car = Car.new
+  end
+  
+  def show
+    @car = Car.find(params[:id])
   end
 
   def create
