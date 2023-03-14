@@ -1,7 +1,7 @@
 <div class="container">
 
 <h1>All cars</h1>
-  <%= link_to "New car", new_car_path(@car) %>
+  <%= link_to "New car", new_car_path(@car), class: "btn btn-primary" %>
 <% if @cars.empty? %>
   <div>No cars yet</div>
 <% else %>
