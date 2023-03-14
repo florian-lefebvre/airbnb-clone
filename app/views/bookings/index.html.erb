@@ -1,0 +1,5 @@
+<ul>
+  <% @bookings.each do |booking| %>
+    <li>Booking <%= booking.id %>: <%= booking.start_date %></li>
+  <% end %>
+</ul>
