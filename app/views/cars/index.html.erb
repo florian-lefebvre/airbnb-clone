@@ -1,15 +1,13 @@
 <div class="container">
   <%= link_to "New car", new_car_path(@car), class: "btn btn-primary" %>
 
-  <% if current_user.owner? %>
+  <% if @show_my_cars %>
     <h2>My cars</h2>
-    <% @cars.each do |car| %>
-      <% if car.user == current_user %>
-        <div class="row row-cols-4">
-          <%= render "cars/partial/card", car: %>
-        </div>
+    <div class="row row-cols-4">
+      <% @my_cars.each do |car| %>
+        <%= render "cars/partial/card", car: %>
       <% end %>
-    <% end %>
+    </div>
   <% end %>
 
   <h2>All cars</h2>
