@@ -1,0 +1,14 @@
+
+<h1>Show page for one booking:</h1>
+<ul>
+  <li>Booking <%= @booking.id %>:
+    <ul>
+      <li>Start date: <%= @booking.start_date %></li>
+      <li>End date: <%= @booking.end_date %></li>
+      <li>User: <%= @booking.user.first_name %></li>
+      <li>Car: <%= @booking.car_id %></li>
+    </ul>
+  </li>
+</ul>
+
+<%= link_to "Back to all bookings", bookings_path %>
