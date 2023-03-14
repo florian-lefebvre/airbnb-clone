@@ -10,5 +10,5 @@ class Car < ApplicationRecord
   validates :model, presence: true
   validates :seats, presence: true
   validates :color, presence: true
-  validates :type, presence: true
+  validates :car_type, presence: true
 end
