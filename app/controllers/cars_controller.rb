@@ -4,7 +4,10 @@ class CarsController < ApplicationController
   before_action :set_car, only: %i[show edit update destroy]
 
   def index
-    @cars = policy_scope(Car)
+    cars = policy_scope(Car)
+    @show_my_cars = current_user.owner?
+    @my_cars = cars.select { |c| c.user == current_user } if @show_my_cars
+    @cars = cars.reject { |c| c.user == current_user }
   end
 
   def new
