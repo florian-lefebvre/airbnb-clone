@@ -2,5 +2,8 @@
 <%= simple_form_for @car do |f| %>
   <%= f.input :year %>
   <%= f.input :price %>
+  <%= f.input :kilometers %>
+  <%= f.input :model %>
+  <%= f.input :photo, as: :file %>
   <%= f.submit "Add new car", class: "btn btn-primary" %>
 <% end %>
