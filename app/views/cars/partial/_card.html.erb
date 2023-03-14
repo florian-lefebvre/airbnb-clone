@@ -1,0 +1,6 @@
+<div class="card p-4 mx-4 rounded">
+  <div><%= car.price %>€/day</div>
+  <div>Car from year <%= car.year %></div>
+  <div>By <%= car.user.full_name %></div>
+  <%= link_to "View details", car_path(car), class: "btn btn-primary mt-2" %>
+</div>
