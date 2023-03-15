@@ -17,7 +17,6 @@
             <%= render "bookings/partial/status", status: booking.status %></div>
             <div class="card-body">
               <div>From <%= booking.start_date %> to <%= booking.end_date %></div>
-              <div><%= booking.status %></div>
             </div>
             <div class="p-3"><%= link_to "View", booking_path(booking), class: "btn btn-primary w-100" %></div>
           </div>
