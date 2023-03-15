@@ -10,8 +10,9 @@
     </div>
     <ul>
     <% @bookings.each do |booking| %>
-      <li><%= link_to "Booking #{booking.id}", booking_path(booking) %>:
-        <ul class="list-group">
+    <div class="card-title"><%= link_to "View booking #{booking.id}", booking_path(booking) %></div>
+    <div class="card" style="width: 18rem;">
+        <ul class="list-group" >
           <li class="list-group-item">Start date: <%= booking.start_date %></li>
           <li class="list-group-item">End date: <%= booking.end_date %></li>
           <li class="list-group-item">Owner: <%= booking.user.first_name %></li>
@@ -19,6 +20,7 @@
         </ul>
       </li>
     <% end %>
+    </div>
   </ul>
   <% end %>
 </div>
