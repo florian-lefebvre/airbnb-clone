@@ -1,7 +1,7 @@
 <div class="container py-5">
   <% if @bookings.empty? %>
     <div>No bookings yet</div>
-    <%= link_to "View available cars", new_car_path, class: "btn btn-primary"  %>
+    <%= link_to "View available cars", cars_path, class: "btn btn-primary"  %>
   <% else %>
     <div class="mb-5">
       <div class="d-flex justify-content-between align-items-center mb-3">
