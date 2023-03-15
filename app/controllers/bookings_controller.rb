@@ -23,10 +23,25 @@ class BookingsController < ApplicationController
     end
   end
 
+  def update
+    authorize @booking
+    if @booking.update(car_params)
+      redirect_to car_path(@car)
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    authorize @booking
+    @booking.destroy
+    redirect_to cars_path, status: :see_other
+  end
+
   private
 
   def booking_params
-    params.require(:booking).permit(:start_date, :end_date)
+    params.require(:booking).permit(policy(@booking).permitted_attributes)
   end
 
   def set_user
