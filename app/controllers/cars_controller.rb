@@ -5,7 +5,7 @@ class CarsController < ApplicationController
 
   def index
     cars = policy_scope(Car)
-    @show_my_cars = current_user && current_user.owner?
+    @show_my_cars = current_user&.owner?
     @my_cars = cars.select { |c| c.user == current_user } if @show_my_cars
     @cars = cars.reject { |c| c.user == current_user }
   end
@@ -26,7 +26,7 @@ class CarsController < ApplicationController
     if @car.save
       redirect_to car_path(@car)
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 

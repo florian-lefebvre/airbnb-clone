@@ -1,12 +1,26 @@
 <% creating = car.id.nil? %>
-<%= simple_form_for(car) do |f| %>
-  <%= f.input :year %>
-  <%= f.input :price %>
-  <%= f.input :kilometers %>
-  <%= f.input :model %>
-  <%= f.input :seats %>
-  <%= f.input :car_type %>
-  <%= f.input :color %>
-  <%= f.input :photo, as: :file %>
-  <%= f.submit creating ? "Add new car" : "Save changes", class: "btn btn-primary" %>
-<% end %>
+<div class="row justify-content-center mt-5">
+  <div class="d-flex px-0 justify-content-between align-items-center col-12 col-sm-8 col-md-6 col-lg-4 px-4 px-sm-0">
+    <h1><%= creating ? "New" : "Edit" %> Car</h1>
+    <%= link_to creating ? "Back to list" : "Back to car", creating ? cars_path : car_path(car), class: "btn btn-secondary btn-sm" %>
+  </div>
+</div>
+<div class="row justify-content-center my-3">
+  <%= simple_form_for car, html: { class: "col-12 col-sm-8 col-md-6 col-lg-4 card rounded-3 p-4" } do |f| %>
+    <div class="row row-cols-1 row-cols-sm-2">
+      <%= f.input :year, class: "col" %>
+      <%= f.input :price, class: "col" %>
+    </div>
+    <div class="row row-cols-1 row-cols-sm-2">
+      <%= f.input :kilometers %>
+      <%= f.input :seats %>
+    </div>
+    <%= f.input :model %>
+    <div class="row row-cols-1 row-cols-sm-2">
+      <%= f.input :car_type %>
+      <%= f.input :color %>
+    </div>
+    <%= f.input :photo, as: :file %>
+    <%= f.submit creating ? "Add new car" : "Save changes", class: "btn btn-primary btn-lg w-100" %>
+  <% end %>
+</div>
