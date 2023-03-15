@@ -1,5 +1,5 @@
 class CarsController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[index]
+  skip_before_action :authenticate_user!, only: %i[index show]
   before_action :set_user, only: %i[new create]
   before_action :set_car, only: %i[show edit update destroy]
 
@@ -16,6 +16,7 @@ class CarsController < ApplicationController
   end
 
   def show
+    @booking = Booking.new
     authorize @car
   end
 

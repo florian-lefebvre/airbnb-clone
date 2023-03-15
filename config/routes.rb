@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   # Defines the root path route ("/")
   # root "articles#index"
-  resources :bookings, only: %i[new create index show edit update]
-  resources :cars
+  resources :bookings, only: %i[index show edit update]
+  resources :cars do
+    resources :bookings, only: %i[create]
+  end
 end

@@ -1,6 +1,10 @@
-<div class="card p-4 mx-4 rounded">
-  <div><%= car.price %>€/day</div>
-  <div>Car from year <%= car.year %></div>
-  <div>By <%= car.user.full_name %></div>
-  <%= link_to "View details", car_path(car), class: "btn btn-primary mt-2" %>
+<div class="col">
+  <div class="card h-100">
+    <%= image_tag car.photo.url, class: "card-img-top", alt: car.model, height: 225, style: "object-fit: cover;" %>
+    <div class="card-body">
+      <h5 class="card-title fw-bolder"><%= car.model %></h5>
+      <p class="card-text">By <%= car.user.full_name %></p>
+      <%= link_to "View details", car_path(car), class: "btn btn-primary mt-2 w-100" %>
+    </div>
+  </div>
 </div>

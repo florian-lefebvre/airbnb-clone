@@ -82,3 +82,7 @@ gem "devise"
 gem "cloudinary"
 
 gem "pundit", "~> 2.3"
+
+gem "faker", "~> 3.1"
+
+gem "open-uri", "~> 0.3.0"
