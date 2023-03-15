@@ -6,7 +6,7 @@ class BookingPolicy < ApplicationPolicy
   end
 
   def show?
-    [car.user, record.car.user].include?(user)
+    [record.user, record.car.user].include?(user)
   end
 
   def create?
