@@ -1,0 +1,11 @@
+<%
+case status
+when "pending"
+  classes = "text-bg-warning"
+when "accepted"
+  classes = "text-bg-success"
+else
+  classes = "text-bg-danger"
+end
+%>
+<span class="badge rounded-pill <%= classes %>"><%= status.humanize %></span>
