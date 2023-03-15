@@ -1,7 +1,7 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:show]
-  before_action :set_car, only: %i[create]
-  before_action :set_user, only: %i[create]
+  before_action :set_car, only: %i[create booking_params]
+  before_action :set_user, only: %i[create booking_params]
 
   def index
     @bookings = policy_scope(Booking)
@@ -41,7 +41,7 @@ class BookingsController < ApplicationController
   private
 
   def booking_params
-    params.require(:booking).permit(policy(@booking).permitted_attributes)
+    params.require(:booking).permit(policy(Booking.new(user: @user, car: @car)).permitted_attributes)
   end
 
   def set_user
