@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
   after_action :verify_authorized, except: :index, unless: :skip_pundit?
   after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
 
+  before_action do
+    ActiveStorage::Current.host = request.base_url
+  end
+
   def configure_permitted_parameters
     keys = %i[first_name last_name]
 

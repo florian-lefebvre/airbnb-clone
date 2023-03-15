@@ -6,9 +6,10 @@ class Car < ApplicationRecord
   validates :year, presence: true, inclusion: { in: 1960..Date.today.year }, numericality: { only_integer: true }
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 1.0 }
   validates :user, presence: true
-  validates :kilometers, presence: true
+  validates :kilometers, presence: true, numericality: { only_integer: true }
   validates :model, presence: true
-  validates :seats, presence: true
+  validates :seats, presence: true, numericality: { only_integer: true }
   validates :color, presence: true
   validates :car_type, presence: true
+  validates :photo, presence: true
 end
