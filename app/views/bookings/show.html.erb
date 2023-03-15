@@ -1,14 +1,20 @@
 
-<h1>Show page for one booking:</h1>
-<ul>
-  <li>Booking <%= @booking.id %>:
+<div class="container my-5">
+  <h1>Your booking details:</h1>
+
     <ul>
+      <li>Status: <%= render "bookings/partial/status", status: @booking.status %></li>
       <li>Start date: <%= @booking.start_date %></li>
       <li>End date: <%= @booking.end_date %></li>
-      <li>User: <%= @booking.user.first_name %></li>
-      <li>Car: <%= @booking.car_id %></li>
+      <% if @booking.car.in?(current_user.cars) %>
+        <li>Requester: <%= @booking.user.full_name %></li>
+      <% else %>
+        <li>Owner: <%= @booking.car.user.full_name %></li>
+      <% end %>
+      <li>Car: <%= @booking.car.model %></li>
     </ul>
-  </li>
-</ul>
 
-<%= link_to "Back to all bookings", bookings_path %>
+  <%= link_to "Show me the car", car_path(@booking.car),class: "btn btn-primary" %>
+  <%= link_to "Back to all bookings", bookings_path,class: "btn btn-primary" %>
+
+</div>
