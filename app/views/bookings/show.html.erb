@@ -6,7 +6,11 @@
       <li>Status: <%= render "bookings/partial/status", status: @booking.status %></li>
       <li>Start date: <%= @booking.start_date %></li>
       <li>End date: <%= @booking.end_date %></li>
-      <li>Owner: <%= @booking.user.full_name %></li>
+      <% if @booking.car.in?(current_user.cars) %>
+        <li>Requester: <%= @booking.user.full_name %></li>
+      <% else %>
+        <li>Owner: <%= @booking.car.user.full_name %></li>
+      <% end %>
       <li>Car: <%= @booking.car.model %></li>
     </ul>
 
