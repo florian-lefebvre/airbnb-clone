@@ -17,7 +17,7 @@ class BookingsController < ApplicationController
     @booking.user = @user
     authorize @booking
     if @booking.save
-      redirect_to car_path(@car)
+      redirect_to bookings_path
     else
       render :new, status: :unprocessable_entity
     end

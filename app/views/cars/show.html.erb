@@ -14,11 +14,13 @@
   <div class="row mb-5 g-3">
     <div class="col-md-6 col-lg-8">
       <%= image_tag @car.photo.url, alt: @car.model, class: "w-100 rounded-4" %>
-      <h1>New booking</h1>
-      <%= simple_form_for [@car, @booking] do |f| %>
-        <%= f.input :start_date %>
-        <%= f.input :end_date %>
-        <%= f.submit "Submit booking", class: "btn btn-primary" %>
+      <% unless @car.user == current_user %>
+        <h1>New booking</h1>
+        <%= simple_form_for [@car, @booking] do |f| %>
+          <%= f.input :start_date %>
+          <%= f.input :end_date %>
+          <%= f.submit "Submit booking", class: "btn btn-primary" %>
+        <% end %>
       <% end %>
     </div>
     <div class="col-md-6 col-lg-4">
