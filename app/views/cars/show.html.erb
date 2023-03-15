@@ -26,7 +26,7 @@
     <div class="col-md-6 col-lg-4">
       <% attributes = {
         year: @car.year,
-        price: @car.price,
+        price: "#{@car.price}€/day",
         user: @car.user.full_name,
         kilometers: @car.kilometers,
         model: @car.model,
