@@ -5,7 +5,7 @@ require "open-uri"
   first_name = Faker::Name.first_name
   last_name = Faker::Name.last_name
   email = Faker::Internet.email(name: "#{first_name} #{last_name}")
-  password = Faker::Internet.password(min_length: 6)
+  password = "123456"
   user = User.create(email:, password:, first_name:, last_name:)
   puts user.full_name
   rand(1..5).times do
