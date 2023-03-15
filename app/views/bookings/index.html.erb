@@ -1,13 +1,24 @@
-<h1>All Bookings</h1>
-<ul>
-  <% @bookings.each do |booking| %>
-    <li><%= link_to "Booking #{booking.id}", booking_path(booking) %>:
-      <ul>
-        <li>Start date: <%= booking.start_date %></li>
-        <li>End date: <%= booking.end_date %></li>
-        <li>User: <%= booking.user.first_name %></li>
-        <li>Car: <%= booking.car_id %></li>
-      </ul>
-    </li>
+<div class="container py-5">
+  <% if @bookings.empty? %>
+    <div>No bookings yet</div>
+    <%= link_to "View available cars", cars_path, class: "btn btn-primary"  %>
+  <% else %>
+    <div class="mb-5">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>All Bookings</h1>
+      </div>
+    </div>
+    <ul>
+    <% @bookings.each do |booking| %>
+      <li><%= link_to "Booking #{booking.id}", booking_path(booking) %>:
+        <ul class="list-group">
+          <li class="list-group-item">Start date: <%= booking.start_date %></li>
+          <li class="list-group-item">End date: <%= booking.end_date %></li>
+          <li class="list-group-item">Owner: <%= booking.user.first_name %></li>
+          <li class="list-group-item">Car: <%= booking.car_id %></li>
+        </ul>
+      </li>
+    <% end %>
+  </ul>
   <% end %>
-</ul>
+</div>
