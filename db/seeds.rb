@@ -12,12 +12,11 @@ require "open-uri"
     year = Faker::Vehicle.year
     price = rand(50.0..1000.0)
     kilometers = rand(10_000..300_000)
-    brand = Faker::Vehicle.make
-    model = "#{brand} #{Faker::Vehicle.model(make_of_model: brand)}"
+    model = Faker::Vehicle.make_and_model
     seats = rand(4..5)
     color = Faker::Color.color_name
     car_type = Faker::Vehicle.car_type
-    file = URI.open(Faker::LoremFlickr.image(size: "1200x800", search_terms: ["car"]))
+    file = URI.open(Faker::LoremFlickr.image(size: "1200x800", search_terms: [CGI.escape(model)]))
 
     car = Car.new(year:, price:, kilometers:, model:, seats:, color:, car_type:, user:)
     car.photo.attach(io: file, filename: "#{model}.png", content_type: "image/jpeg")
