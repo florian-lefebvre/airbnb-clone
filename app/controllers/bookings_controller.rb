@@ -4,7 +4,6 @@ class BookingsController < ApplicationController
   before_action :set_user, only: %i[create]
 
   def index
-    @bookings = Booking.all
     @bookings = policy_scope(Booking)
   end
 
