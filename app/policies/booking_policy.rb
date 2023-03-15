@@ -1,7 +1,7 @@
 class BookingPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.where(user:)
+      scope.all.order(created_at: :desc)
     end
   end
 

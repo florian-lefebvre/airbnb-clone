@@ -1,7 +1,37 @@
+<% if @show_requests %>
+  <div class="container py-5">
+    <% if @requests.empty? %>
+      <div class="text-center">No requests yet</div>
+    <% else %>
+      <div class="mb-2">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h1>Booking requests</h1>
+        </div>
+      </div>
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-5">
+        <% @requests.each do |booking| %>
+          <div class="col">
+            <div class="card">
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <span><%= booking.car.model %></span>
+                <%= render "bookings/partial/status", status: booking.status %></div>
+              <div class="card-body">
+                <div>From <%= booking.start_date %> to <%= booking.end_date %></div>
+              </div>
+              <div class="p-3"><%= link_to "View", booking_path(booking), class: "btn btn-primary w-100" %></div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
 <div class="container py-5">
   <% if @bookings.empty? %>
-    <div>No bookings yet</div>
-    <%= link_to "View available cars", cars_path, class: "btn btn-primary"  %>
+    <div class="text-center">
+      <div>No bookings yet</div>
+      <%= link_to "View available cars", cars_path, class: "btn btn-primary mt-2"  %>
+    </div>
   <% else %>
     <div class="mb-2">
       <div class="d-flex justify-content-between align-items-center mb-3">
@@ -13,8 +43,8 @@
         <div class="col">
           <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-            <span><%= booking.car.model %></span>
-            <%= render "bookings/partial/status", status: booking.status %></div>
+              <span><%= booking.car.model %></span>
+              <%= render "bookings/partial/status", status: booking.status %></div>
             <div class="card-body">
               <div>From <%= booking.start_date %> to <%= booking.end_date %></div>
             </div>
