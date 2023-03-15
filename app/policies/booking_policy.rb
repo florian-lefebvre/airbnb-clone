@@ -1,15 +1,31 @@
 class BookingPolicy < ApplicationPolicy
+  class Scope < Scope
+    def resolve
+      scope.where(user:)
+    end
+  end
+
   def show?
-    true
+    [car.user, record.car.user].include?(user)
   end
 
   def create?
     true
   end
-  class Scope < Scope
-    # NOTE: Be explicit about which records you allow access to!
-    def resolve
-      scope.all
+
+  def update?
+    [record.user, record.car.user].include?(user)
+  end
+
+  def destroy?
+    record.user == user
+  end
+
+  def permitted_attributes
+    if user == record.car.user
+      [:status]
+    elsif user == record.user
+      %i[start_date end_date]
     end
   end
 end
