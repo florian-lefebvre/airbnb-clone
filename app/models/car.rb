@@ -11,7 +11,7 @@ class Car < ApplicationRecord
   validates :seats, presence: true, numericality: { only_integer: true }
   validates :color, presence: true
   validates :car_type, presence: true
-  validates :photo, presence: true
+  # validates :photo, presence: true
   validates :address, presence: true
 
   geocoded_by :address
