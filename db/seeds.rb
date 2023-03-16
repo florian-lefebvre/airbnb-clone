@@ -10,7 +10,7 @@ require "open-uri"
   puts user.full_name
   rand(1..5).times do
     year = Faker::Vehicle.year
-    price = rand(50.0..1000.0)
+    price = rand(50..1000)
     kilometers = rand(10_000..300_000)
     model = Faker::Vehicle.make_and_model
     seats = rand(4..5)
