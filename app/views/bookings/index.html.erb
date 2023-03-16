@@ -17,8 +17,27 @@
                 <%= render "bookings/partial/status", status: booking.status %></div>
               <div class="card-body">
                 <div>From <%= booking.start_date %> to <%= booking.end_date %></div>
+                <div>
+                  <% if booking.car.user == current_user %>
+                    Requester: <%= booking.user.full_name %>
+                  <% else %>
+                    Owner: <%= booking.car.user.full_name %>
+                  <% end %>
+                </div>
               </div>
-              <div class="p-3"><%= link_to "View", booking_path(booking), class: "btn btn-primary w-100" %></div>
+              <div class="p-3">
+                <%= link_to "Show me the car", car_path(booking.car), class: "btn btn-primary w-100" %>
+                <% if booking.car.user == current_user %>
+                  <%= simple_form_for(booking) do |f| %>
+                    <%= f.input :status, :as => :hidden, :input_html => { :value => 'rejected' }  %>
+                    <%= f.submit "Reject booking", class: "btn btn-danger w-100" %>
+                  <% end %>
+                  <%= simple_form_for(booking) do |f| %>
+                    <%= f.input :status, :as => :hidden, :input_html => { :value => 'accepted' } %>
+                    <%= f.submit "Accept booking", class: "btn btn-success w-100" %>
+                  <% end %>
+                <% end %>
+              </div>
             </div>
           </div>
         <% end %>
@@ -47,8 +66,24 @@
               <%= render "bookings/partial/status", status: booking.status %></div>
             <div class="card-body">
               <div>From <%= booking.start_date %> to <%= booking.end_date %></div>
+              <div>
+                <% if booking.car.user == current_user %>
+                  Requester: <%= booking.user.full_name %>
+                <% else %>
+                  Owner: <%= booking.car.user.full_name %>
+                <% end %>
+              </div>
             </div>
-            <div class="p-3"><%= link_to "View", booking_path(booking), class: "btn btn-primary w-100" %></div>
+            <div class="p-3">
+              <% if policy(booking).edit? %>
+                <%= link_to "Edit booking", edit_booking_path(booking), class: "btn btn-primary w-100 mb-3" %>
+              <% end %>
+              <% if policy(booking).destroy? %>
+                <%= link_to "Cancel booking",
+                  booking_path(booking),
+                  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"},class: "btn btn-danger w-100"  %>
+              <% end %>
+            </div>
           </div>
         </div>
       <% end %>

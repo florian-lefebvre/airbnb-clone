@@ -1,7 +1,7 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: %i[show edit update destroy]
   before_action :set_car, only: %i[create update]
-  before_action :set_user, only: %i[create update] 
+  before_action :set_user, only: %i[create update]
 
   def index
     bookings = policy_scope(Booking)
@@ -35,7 +35,7 @@ class BookingsController < ApplicationController
     owner_editing = @booking.car.user == current_user
     valid = @booking.update(owner_editing ? booking_params : booking_params.reverse_merge!({ status: "pending" }))
     if valid
-      redirect_to booking_path(@booking)
+      redirect_to bookings_path
     else
       render :edit, status: :unprocessable_entity
     end
