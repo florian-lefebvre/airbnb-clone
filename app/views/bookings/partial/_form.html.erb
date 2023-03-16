@@ -1,0 +1,6 @@
+<% creating = models.last.id.nil? %>
+<%= simple_form_for models, html: { class: "card rounded p-3" } do |f| %>
+  <%= f.input :start_date %>
+  <%= f.input :end_date %>
+  <%= f.submit creating ? "Send request" : "Update", class: "btn btn-primary" %>
+<% end %>
