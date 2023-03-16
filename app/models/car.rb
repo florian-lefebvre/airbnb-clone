@@ -14,6 +14,10 @@ class Car < ApplicationRecord
   validates :color, presence: true
   validates :car_type, presence: true
   validates :photo, presence: true
+  validates :address, presence: true
+
+  geocoded_by :address
+  after_validation :geocode, if: :will_save_change_to_address?
 
   pg_search_scope :search_by_model_and_car_type, against: %i[model car_type], using: { tsearch: { prefix: true } }
 end
