@@ -1,23 +1,22 @@
-
 <div class="container my-5">
   <h1>Your booking details:</h1>
-
-    <ul>
-      <li>Status: <%= render "bookings/partial/status", status: @booking.status %></li>
-      <li>Start date: <%= @booking.start_date %></li>
-      <li>End date: <%= @booking.end_date %></li>
-      <% if @booking.car.in?(current_user.cars) %>
-        <li>Requester: <%= @booking.user.full_name %></li>
-      <% else %>
-        <li>Owner: <%= @booking.car.user.full_name %></li>
-      <% end %>
-      <li>Car: <%= @booking.car.model %></li>
-    </ul>
-
-  <%= link_to "Show me the car", car_path(@booking.car),class: "btn btn-primary" %>
-  <%= link_to "Back to all bookings", bookings_path,class: "btn btn-primary" %>
+  <ul>
+    <li>Status: <%= render "bookings/partial/status", status: @booking.status %></li>
+    <li>Start date: <%= @booking.start_date %></li>
+    <li>End date: <%= @booking.end_date %></li>
+    <% if @booking.car.in?(current_user.cars) %>
+      <li>Requester: <%= @booking.user.full_name %></li>
+    <% else %>
+      <li>Owner: <%= @booking.car.user.full_name %></li>
+    <% end %>
+    <li>Car: <%= @booking.car.model %></li>
+  </ul>
+  <%= link_to "Show me the car", car_path(@booking.car), class: "btn btn-primary" %>
+  <%= link_to "Back to all bookings", bookings_path, class: "btn btn-primary" %>
+  <% if policy(@booking).edit? %>
+    <%= link_to "Edit booking", edit_booking_path(@booking), class: "btn btn-primary" %>
+  <% end %>
   <%= link_to "Delete this booking",
     booking_path(@booking),
     data: {turbo_method: :delete, turbo_confirm: "Are you sure?"},class: "btn btn-primary"  %>
-
 </div>

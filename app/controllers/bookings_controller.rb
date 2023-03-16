@@ -1,7 +1,7 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: %i[show destroy]
-  before_action :set_car, only: %i[create booking_params]
-  before_action :set_user, only: %i[create booking_params]
+  before_action :set_booking, only: %i[show edit update destroy]
+  before_action :set_car, only: %i[create update]
+  before_action :set_user, only: %i[create update] 
 
   def index
     bookings = policy_scope(Booking)
@@ -26,10 +26,16 @@ class BookingsController < ApplicationController
     end
   end
 
+  def edit
+    authorize @booking
+  end
+
   def update
     authorize @booking
-    if @booking.update(car_params)
-      redirect_to car_path(@car)
+    owner_editing = @booking.car.user == current_user
+    valid = @booking.update(owner_editing ? booking_params : booking_params.reverse_merge!({ status: "pending" }))
+    if valid
+      redirect_to booking_path(@booking)
     else
       render :edit, status: :unprocessable_entity
     end
@@ -52,7 +58,7 @@ class BookingsController < ApplicationController
   end
 
   def set_car
-    @car = Car.find(params[:car_id])
+    @car = @booking&.car || Car.find(params[:car_id])
   end
 
   def set_booking
