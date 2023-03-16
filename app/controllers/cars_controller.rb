@@ -17,7 +17,6 @@ class CarsController < ApplicationController
 
   def show
     @booking = Booking.new
-    @bookings = @car.bookings.filter { |b| b.end_date > Date.today && b.accepted? }
     authorize @car
   end
 
