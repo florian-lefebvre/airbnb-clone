@@ -2,7 +2,7 @@ class Car < ApplicationRecord
   include PgSearch::Model
 
   belongs_to :user
-  has_many :bookings
+  has_many :bookings, dependent: :destroy
   has_one_attached :photo
 
   validates :year, presence: true, inclusion: { in: 1960..Date.today.year }, numericality: { only_integer: true }
