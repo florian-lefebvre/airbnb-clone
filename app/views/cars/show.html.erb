@@ -16,11 +16,7 @@
       <%= image_tag @car.photo.url, alt: @car.model, class: "w-100 rounded-4" %>
       <% unless @car.user == current_user %>
         <h3 class="mt-5">New booking</h3>
-        <%= simple_form_for [@car, @booking], html: { class: "card rounded p-3" } do |f| %>
-          <%= f.input :start_date %>
-          <%= f.input :end_date %>
-          <%= f.submit "Send request", class: "btn btn-primary" %>
-        <% end %>
+        <%= render "bookings/partial/form", models: [@car, @booking] %>
       <% end %>
     </div>
     <div class="col-md-6 col-lg-4">
