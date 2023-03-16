@@ -16,5 +16,15 @@
 
   <%= link_to "Show me the car", car_path(@booking.car),class: "btn btn-primary" %>
   <%= link_to "Back to all bookings", bookings_path,class: "btn btn-primary" %>
+  <% if @booking.car.in?(current_user.cars) %>
+    <%= simple_form_for(@booking) do |f| %>
+      <%= f.input :status, :as => :hidden, :input_html => { :value => 'rejected' }  %>
+      <%= f.submit "Reject booking", class: "btn btn-danger" %>
+    <% end %>
+    <%= simple_form_for(@booking) do |f| %>
+      <% f.input :status, :input_html => { :value => 'accepted' } %>
+      <%= f.submit "Accept booking", class: "btn btn-success" %>
+    <% end %>
+  <% end %>
 
 </div>
