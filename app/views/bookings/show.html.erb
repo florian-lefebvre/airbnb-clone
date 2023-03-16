@@ -18,13 +18,13 @@
     <%= link_to "Edit booking", edit_booking_path(@booking), class: "btn btn-primary" %>
   <% end %>
 
-  <% if @booking.car.in?(current_user.cars) %>
+  <% if @booking.car.user == current_user %>
     <%= simple_form_for(@booking) do |f| %>
       <%= f.input :status, :as => :hidden, :input_html => { :value => 'rejected' }  %>
       <%= f.submit "Reject booking", class: "btn btn-danger" %>
     <% end %>
     <%= simple_form_for(@booking) do |f| %>
-      <% f.input :status, :input_html => { :value => 'accepted' } %>
+      <%= f.input :status, :as => :hidden, :input_html => { :value => 'accepted' } %>
       <%= f.submit "Accept booking", class: "btn btn-success" %>
     <% end %>
   <% end %>
