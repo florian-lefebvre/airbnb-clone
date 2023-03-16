@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: %i[show edit update destroy]
+  before_action :set_booking, only: %i[edit update destroy]
   before_action :set_car, only: %i[create update]
   before_action :set_user, only: %i[create update]
 
@@ -8,10 +8,6 @@ class BookingsController < ApplicationController
     @show_requests = current_user.owner?
     @requests = bookings.select { |b| b.car.user == current_user }
     @bookings = bookings.select { |b| b.user == current_user }
-  end
-
-  def show
-    authorize @booking
   end
 
   def create
