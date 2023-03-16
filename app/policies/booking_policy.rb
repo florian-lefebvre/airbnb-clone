@@ -13,6 +13,10 @@ class BookingPolicy < ApplicationPolicy
     true
   end
 
+  def edit?
+    record.user == user
+  end
+
   def update?
     [record.user, record.car.user].include?(user)
   end
