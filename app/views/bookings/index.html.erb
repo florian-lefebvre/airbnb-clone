@@ -8,40 +8,48 @@
           <h1>Booking requests</h1>
         </div>
       </div>
+
+
       <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-5">
         <% @requests.each do |booking| %>
-          <div class="col">
-            <div class="card">
-              <div class="card-header d-flex justify-content-between align-items-center">
-                <span><%= booking.car.model %></span>
-                <%= render "bookings/partial/status", status: booking.status %></div>
-              <div class="card-body">
-                <div>From <%= booking.start_date %> to <%= booking.end_date %></div>
-                <div>
-                  <% if booking.car.user == current_user %>
-                    Requester: <%= booking.user.full_name %>
-                  <% else %>
-                    Owner: <%= booking.car.user.full_name %>
-                  <% end %>
+          <% unless booking.status == 'rejected' %>
+            <div class="col">
+              <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                  <span><%= booking.car.model %></span>
+                  <%= render "bookings/partial/status", status: booking.status %></div>
+                <div class="card-body">
+                  <div>From <%= booking.start_date %> to <%= booking.end_date %></div>
+                  <div>
+                    <% if booking.car.user == current_user %>
+                      Requester: <%= booking.user.full_name %>
+                    <% else %>
+                      Owner: <%= booking.car.user.full_name %>
+                    <% end %>
+                  </div>
+                </div>
+                <div class="p-3">
+                  <%= link_to "Car details", car_path(booking.car), class: "btn btn-primary w-100" %>
+                  <div class="d-flex justify-content-between">
+                    <% if booking.car.user == current_user %>
+                      <%= simple_form_for booking, html: { class: "w-100 me-3"} do |f| %>
+                        <%= f.input :status, :as => :hidden, :input_html => { :value => 'rejected' }  %>
+                        <%= f.submit "Reject", class: "btn btn-danger w-100" %>
+                      <% end %>
+                      <%= simple_form_for booking, html: { class: "w-100"} do |f| %>
+                        <%= f.input :status, :as => :hidden, :input_html => { :value => 'accepted' } %>
+                        <%= f.submit "Accept", class: "btn btn-success w-100" %>
+                      <% end %>
+                    <% end %>
+                  </div>
                 </div>
               </div>
-              <div class="p-3">
-                <%= link_to "Show me the car", car_path(booking.car), class: "btn btn-primary w-100" %>
-                <% if booking.car.user == current_user %>
-                  <%= simple_form_for(booking) do |f| %>
-                    <%= f.input :status, :as => :hidden, :input_html => { :value => 'rejected' }  %>
-                    <%= f.submit "Reject booking", class: "btn btn-danger w-100" %>
-                  <% end %>
-                  <%= simple_form_for(booking) do |f| %>
-                    <%= f.input :status, :as => :hidden, :input_html => { :value => 'accepted' } %>
-                    <%= f.submit "Accept booking", class: "btn btn-success w-100" %>
-                  <% end %>
-                <% end %>
-              </div>
             </div>
-          </div>
+          <% end %>
         <% end %>
       </div>
+
+
     <% end %>
   </div>
 <% end %>
@@ -75,14 +83,17 @@
               </div>
             </div>
             <div class="p-3">
-              <% if policy(booking).edit? %>
-                <%= link_to "Edit booking", edit_booking_path(booking), class: "btn btn-primary w-100 mb-3" %>
-              <% end %>
-              <% if policy(booking).destroy? %>
-                <%= link_to "Cancel booking",
-                  booking_path(booking),
-                  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"},class: "btn btn-danger w-100"  %>
-              <% end %>
+              <%= link_to "Car details", car_path(booking.car), class: "btn btn-primary w-100" %>
+              <div class="d-flex justify-content-between mt-3">
+                <% if policy(booking).destroy? %>
+                  <%= link_to "Cancel",
+                    booking_path(booking),
+                    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"},class: "btn btn-danger me-3 w-100"  %>
+                <% end %>
+                <% if policy(booking).edit? %>
+                  <%= link_to "Edit", edit_booking_path(booking), class: "btn btn-primary w-100" %>
+                <% end %>
+              </div>
             </div>
           </div>
         </div>
