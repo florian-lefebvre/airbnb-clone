@@ -13,7 +13,7 @@ class CarsController < ApplicationController
         lat: c.latitude,
         lng: c.longitude,
         info_window_html: render_to_string(partial: "cars/partial/card", locals: { car: c }),
-        marker_html: render_to_string(partial: "cars/partial/marker", locals: { car: c })
+        marker_html: render_to_string(partial: "cars/partial/marker", locals: { car: c }),
       }
     end
   end
@@ -25,6 +25,11 @@ class CarsController < ApplicationController
 
   def show
     @booking = Booking.new
+    @markers = [{
+      lat: @car.latitude,
+      lng: @car.longitude,
+      marker_html: render_to_string(partial: "cars/partial/marker", locals: { car: @car }),
+    }]
     authorize @car
   end
 
