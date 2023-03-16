@@ -7,10 +7,14 @@
   transition: all 0.3s ease 0s;
 }
 
-.btn-primary:hover {
+.btn-primary:hover, .banner .btn-primary {
   color: #FFF;
   background: rgba(58, 133, 191, 0.75);
   border: 2px solid rgba(58, 133, 191, 0.75);
+}
+
+.banner .btn-primary:hover {
+  background: rgb(58, 133, 191);
 }
 
 .btn-success {
