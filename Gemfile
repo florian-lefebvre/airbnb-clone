@@ -79,10 +79,14 @@ end
 
 gem "devise"
 
-gem "cloudinary"
+group :production do
+  gem "cloudinary"
+end
 
 gem "pundit", "~> 2.3"
 
 gem "faker", "~> 3.1"
 
 gem "open-uri", "~> 0.3.0"
+
+gem "geocoder", "~> 1.8"
