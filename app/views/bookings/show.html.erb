@@ -16,5 +16,8 @@
 
   <%= link_to "Show me the car", car_path(@booking.car),class: "btn btn-primary" %>
   <%= link_to "Back to all bookings", bookings_path,class: "btn btn-primary" %>
+  <%= link_to "Delete this booking",
+    booking_path(@booking),
+    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"},class: "btn btn-primary"  %>
 
 </div>

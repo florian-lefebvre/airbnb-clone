@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: [:show]
+  before_action :set_booking, only: %i[show destroy]
   before_action :set_car, only: %i[create booking_params]
   before_action :set_user, only: %i[create booking_params]
 
@@ -38,7 +38,7 @@ class BookingsController < ApplicationController
   def destroy
     authorize @booking
     @booking.destroy
-    redirect_to cars_path, status: :see_other
+    redirect_to bookings_path, status: :see_other
   end
 
   private
