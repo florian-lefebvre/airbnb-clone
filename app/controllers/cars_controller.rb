@@ -4,7 +4,11 @@ class CarsController < ApplicationController
   before_action :set_car, only: %i[show edit update destroy]
 
   def index
-    cars = policy_scope(Car).search_by_model_and_car_type(params[:query]) unless params[:query].nil?
+    if params[:query].nil?
+      cars = policy_scope(Car)
+    else
+      cars = policy_scope(Car).search_by_model_and_car_type(params[:query])
+    end
     @show_my_cars = current_user&.owner?
     @my_cars = cars.select { |c| c.user == current_user } if @show_my_cars
     @cars = cars.reject { |c| c.user == current_user }
