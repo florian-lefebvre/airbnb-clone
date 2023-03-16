@@ -1,9 +1,10 @@
-<%= link_to car_path(car), class: "col" do %>
-  <div class="card h-100">
+<div class="col">
+  <div class="card h-100 position-relative">
     <%= image_tag car.photo.url, class: "card-img-top", alt: car.model, height: 225, style: "object-fit: cover;" %>
     <div class="card-body">
-      <h5 class="card-title fw-bolder"><%= car.model %></h5>
-      <p class="card-text">Owner: <%= car.user.full_name %></p>
+      <%= link_to car.model, car_path(car), class: "card-title fw-bolder stretched-link" %>
+      <p class="card-text">Owned by <span class="fst-italic"><%= car.user.full_name %></span></p>
     </div>
+    <span class="badge rounded-pill text-bg-primary position-absolute" style="top: 5px; right: 5px;"><%= car.price %>€/day</span>
   </div>
-<% end %>
+</div>
