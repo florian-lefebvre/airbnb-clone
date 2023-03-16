@@ -1,4 +1,6 @@
 class Car < ApplicationRecord
+  include PgSearch::Model
+
   belongs_to :user
   has_many :bookings
   has_one_attached :photo
@@ -12,4 +14,6 @@ class Car < ApplicationRecord
   validates :color, presence: true
   validates :car_type, presence: true
   validates :photo, presence: true
+
+  pg_search_scope :search_by_model_and_car_type, against: %i[model car_type], using: { tsearch: { prefix: true } }
 end
