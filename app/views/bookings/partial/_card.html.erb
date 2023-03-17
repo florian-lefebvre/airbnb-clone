@@ -6,7 +6,10 @@
       <%= render "bookings/partial/status", status: booking.status %>
     </div>
     <div class="card-body">
-      <div>From <%= booking.start_date %> to <%= booking.end_date %></div>
+      <div><strong>From</strong></div>
+      <div><%= booking.start_date.strftime("%B %d, %Y") %> </div>
+      <div><strong>To</strong></div>
+      <div><%= booking.end_date.strftime("%B %d, %Y") %></div>
       <div>
         <% if is_owner %>
           Requested by <%= booking.user.full_name %>
