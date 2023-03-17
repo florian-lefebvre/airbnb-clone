@@ -1,4 +1,4 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon sticky-top">
+<div class="navbar navbar-expand-md navbar-light navbar-lewagon sticky-top">
   <div class="container">
     <%= link_to "/", class: "navbar-brand" do %>
       <%= image_tag "logo.jpg" %>
@@ -7,6 +7,16 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <%= form_with url: cars_path, method: :get, class: "d-flex mt-3 mt-md-0 me-md-3" do %>
+        <%= text_field_tag :query,
+        params[:query],
+        class: "form-control me-1",
+        placeholder: "Find a car"
+      %>
+        <%= button_tag type: 'submit', class: "btn btn-primary p-0", style: "width: 48px; height: 40px;" do %>
+          <i class="fa-solid fa-magnifying-glass"></i>
+        <% end %>
+      <% end %>
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <li class="nav-item active">
@@ -15,21 +25,37 @@
           <li class="nav-item">
             <%= link_to "Bookings", bookings_path, class: "nav-link" %>
           </li>
-          <li class="nav-item">
-            <%= link_to "Log out", destroy_user_session_path, class: "nav-link", data: {turbo_method: :delete} %>
-          </li>
-        <% else %>
-          <li class="nav-item">
-            <%= link_to "Search for a car", cars_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item ms-2">
-            <%= link_to "Register", new_user_registration_path, class: "btn btn-primary" %>
-          </li>
-        <% end %>
-      </ul>
+          <li class="nav-item dropdown" style="cursor: pointer;">
+            <div
+              id="navbarDropdown"
+              class="dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <img
+                class="avatar"
+                src="https://source.boringavatars.com/beam/40/<%= current_user.id %>"
+              />
+              <%= current_user.full_name %>
+            </div>
+                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                  <%= link_to "Settings", edit_user_registration_path, class: "dropdown-item" %>
+                  <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", data: {turbo_method: :delete} %>
+                </div>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to "Search for a car", cars_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item ms-2">
+                <%= link_to "Register", new_user_registration_path, class: "btn btn-primary" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
     </div>
-  </div>
-</div>

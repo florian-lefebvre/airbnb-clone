@@ -1,4 +1,4 @@
-<div class="container my-5">
+<div class="container my-5 car-index">
   <% if @show_my_cars %>
     <div class="mb-5">
       <div class="d-flex justify-content-between align-items-center mb-3">
@@ -15,6 +15,11 @@
   <% if @cars.empty? %>
     <div>No cars yet</div>
   <% else %>
+    <div style="width: 100%; height: min(600px, 100vh);"
+    class="mb-5 rounded-3"
+        data-controller="map"
+        data-map-markers-value="<%= @markers.to_json %>"
+        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
     <%= render "cars/partial/card_grid", cars: @cars %>
   <% end %>
 </div>

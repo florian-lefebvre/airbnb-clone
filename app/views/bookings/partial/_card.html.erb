@@ -1,0 +1,41 @@
+<% is_owner = booking.car.user == current_user %>
+<div class="col">
+  <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <span><%= booking.car.model %></span>
+      <%= render "bookings/partial/status", status: booking.status %>
+    </div>
+    <div class="card-body">
+      <div>From <%= booking.start_date %> to <%= booking.end_date %></div>
+      <div>
+        <% if is_owner %>
+          Requested by <%= booking.user.full_name %>
+        <% else %>
+          Owned by <%= booking.car.user.full_name %>
+        <% end %>
+      </div>
+    </div>
+    <div class="p-3">
+      <%= link_to "Car details", car_path(booking.car), class: "btn btn-primary w-100" %>
+      <div class="d-flex justify-content-between mt-3">
+        <% if is_owner %>
+          <%= simple_form_for booking, html: { class: "w-100"} do |f| %>
+            <%= f.input :status, :as => :hidden, :input_html => { :value => 'rejected' }  %>
+            <%= f.submit "Reject", class: "btn btn-danger w-100", style: "margin-top: -1rem;" %>
+          <% end %>
+          <% unless booking.accepted? %>
+            <%= simple_form_for booking, html: { class: "w-100 ms-3"} do |f| %>
+              <%= f.input :status, :as => :hidden, :input_html => { :value => 'accepted' } %>
+              <%= f.submit "Accept", class: "btn btn-success w-100", style: "margin-top: -1rem;" %>
+            <% end %>
+          <% end %>
+        <% else %>
+          <%= link_to "Cancel",
+                    booking_path(booking),
+                    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"},class: "btn btn-danger me-3 w-100"  %>
+          <%= link_to "Edit", edit_booking_path(booking), class: "btn btn-primary w-100" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

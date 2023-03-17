@@ -18,12 +18,6 @@
   <div class="row mb-5 g-3">
     <div class="col-md-6 col-lg-8">
       <%= image_tag @car.photo.url, alt: @car.model, class: "w-100 rounded-4" %>
-      <% unless @car.user == current_user %>
-        <h3 class="mt-5">New booking</h3>
-        <%= render "bookings/partial/form", models: [@car, @booking] %>
-      <% end %>
-    </div>
-    <div class="col-md-6 col-lg-4">
       <% attributes = {
         year: @car.year,
         owner: @car.user.full_name,
@@ -34,24 +28,38 @@
         color: @car.color,
         car_type: @car.car_type
       } %>
-      <div class="accordion" id="car-properties">
+      <dl class="row row-cols-sm-2 row-cols-lg-3 mt-3">
         <% attributes.each do |k, v| %>
-          <% heading_id = "car-attributes-heading-#{k}" %>
-          <% collapse_id = "car-attributes-collapse-#{k}" %>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="<%= heading_id %>">
-              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#<%= collapse_id %>" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                <%= k.to_s.humanize %>
-              </button>
-            </h2>
-            <div id="<%= collapse_id %>" class="accordion-collapse collapse show" aria-labelledby="<%= heading_id %>">
-              <div class="accordion-body">
-                <%= v %>
-              </div>
-            </div>
+          <div>
+            <dt><%= k.to_s.humanize %></dt>
+            <dd class="text-truncate"><%= v %></dd>
           </div>
         <% end %>
-      </div>
+      </dl>
+    </div>
+    <% @bookings = @car.bookings.filter { |b| b.end_date >= Date.today && b.accepted? } %>
+    <div class="col-md-6 col-lg-4">
+      <h3>Bookings</h3>
+      <% if @bookings.empty? %>
+        <p>No bookings</p>
+      <% else %>
+        <ul class="list-group">
+          <% @bookings.each do |booking| %>
+            <li class="list-group-item"><%= booking.start_date %> to <%= booking.end_date %></li>
+          <% end %>
+        </ul>
+      <% end %>
+      <% unless @car.user == current_user %>
+        <div class="mt-3">
+          <%= render "bookings/partial/form", models: [@car, @booking] %>
+        </div>
+      <% end %>
+      <div style="width: 100%; height: min(400px, 100vh);"
+    class="mt-5 rounded-3"
+        data-controller="map"
+        data-map-markers-value="<%= @markers.to_json %>"
+        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
     </div>
   </div>
+</div>
 </div>

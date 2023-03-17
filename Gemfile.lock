@@ -121,6 +121,7 @@ GEM
     ffi (1.15.5)
     font-awesome-sass (6.3.0)
       sassc (~> 2.0)
+    geocoder (1.8.1)
     globalid (1.1.0)
       activesupport (>= 5.0)
     http-accept (1.7.0)
@@ -172,6 +173,9 @@ GEM
       uri
     orm_adapter (0.5.0)
     pg (1.4.6)
+    pg_search (2.3.6)
+      activerecord (>= 5.2)
+      activesupport (>= 5.2)
     public_suffix (5.0.1)
     puma (5.6.5)
       nio4r (~> 2.0)
@@ -290,10 +294,12 @@ DEPENDENCIES
   dotenv-rails
   faker (~> 3.1)
   font-awesome-sass (~> 6.1)
+  geocoder (~> 1.8)
   jbuilder
   jsbundling-rails
   open-uri (~> 0.3.0)
   pg (~> 1.1)
+  pg_search
   puma (~> 5.0)
   pundit (~> 2.3)
   rails (~> 7.0.4, >= 7.0.4.2)

@@ -11,6 +11,7 @@ gem "sprockets-rails"
 
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
+gem "pg_search"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
@@ -79,10 +80,14 @@ end
 
 gem "devise"
 
-gem "cloudinary"
+group :production do
+  gem "cloudinary"
+end
 
 gem "pundit", "~> 2.3"
 
 gem "faker", "~> 3.1"
 
 gem "open-uri", "~> 0.3.0"
+
+gem "geocoder", "~> 1.8"

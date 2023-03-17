@@ -4,10 +4,22 @@ class CarsController < ApplicationController
   before_action :set_car, only: %i[show edit update destroy]
 
   def index
-    cars = policy_scope(Car)
+    if params[:query].nil?
+      cars = policy_scope(Car)
+    else
+      cars = policy_scope(Car).search_by_model_and_car_type(params[:query])
+    end
     @show_my_cars = current_user&.owner?
     @my_cars = cars.select { |c| c.user == current_user } if @show_my_cars
     @cars = cars.reject { |c| c.user == current_user }
+    @markers = @cars.reject { |c| c.longitude.nil? }.map do |c|
+      {
+        lat: c.latitude,
+        lng: c.longitude,
+        info_window_html: render_to_string(partial: "cars/partial/card", locals: { car: c }),
+        marker_html: render_to_string(partial: "cars/partial/marker", locals: { car: c }),
+      }
+    end
   end
 
   def new
@@ -17,6 +29,11 @@ class CarsController < ApplicationController
 
   def show
     @booking = Booking.new
+    @markers = [{
+      lat: @car.latitude,
+      lng: @car.longitude,
+      marker_html: render_to_string(partial: "cars/partial/marker", locals: { car: @car }),
+    }]
     authorize @car
   end
 
@@ -61,6 +78,6 @@ class CarsController < ApplicationController
   end
 
   def car_params
-    params.require(:car).permit(:price, :year, :kilometers, :seats, :car_type, :color, :model, :photo)
+    params.require(:car).permit(:price, :year, :kilometers, :seats, :car_type, :color, :model, :photo, :address)
   end
 end
