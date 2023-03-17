@@ -6,7 +6,7 @@ class BookingsController < ApplicationController
   def index
     bookings = policy_scope(Booking)
     @show_requests = current_user.owner?
-    @requests = bookings.select { |b| b.car.user == current_user }
+    @requests = bookings.select { |b| b.car.user == current_user && !b.rejected? }
     @bookings = bookings.select { |b| b.user == current_user }
   end
 
