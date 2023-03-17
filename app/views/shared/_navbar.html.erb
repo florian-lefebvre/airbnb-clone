@@ -1,4 +1,4 @@
-<div class="navbar navbar-expand-md navbar-light navbar-lewagon sticky-top">
+<div class="navbar navbar-expand-sm navbar-lewagon navbar-light fixed-top">
   <div class="container">
     <%= link_to "/", class: "navbar-brand" do %>
       <%= image_tag "logo.jpg" %>
@@ -28,7 +28,7 @@
           <li class="nav-item dropdown" style="cursor: pointer;">
             <div
               id="navbarDropdown"
-              class="dropdown-toggle"
+              class="dropdown-toggle d-flex align-items-center"
               data-bs-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
@@ -37,7 +37,7 @@
                 class="avatar"
                 src="https://source.boringavatars.com/beam/40/<%= current_user.id %>"
               />
-              <%= current_user.full_name %>
+              <span class="ms-2"><%= current_user.full_name %></span>
             </div>
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                   <%= link_to "Settings", edit_user_registration_path, class: "dropdown-item" %>
@@ -55,6 +55,8 @@
                 <%= link_to "Register", new_user_registration_path, class: "btn btn-primary" %>
               </li>
             <% end %>
+            <%= render "shared/theme_toggle" %>
+
           </ul>
         </div>
       </div>

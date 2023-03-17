@@ -10,9 +10,23 @@ export default class extends Controller {
   connect() {
     mapboxgl.accessToken = this.apiKeyValue;
 
+    new MutationObserver(([{ oldValue }]) => {
+      let newValue = document.documentElement.getAttribute(
+        "data-bs-theme"
+      );
+      if (newValue !== oldValue) {
+        this.map.setStyle(`mapbox://styles/mapbox/${newValue}-v11`);
+      }
+    }).observe(document.documentElement, {
+      attributeFilter: ["data-bs-theme"],
+      attributeOldValue: true,
+    });
+
+    const theme = document.documentElement.getAttribute("data-bs-theme");
+
     this.map = new mapboxgl.Map({
       container: this.element,
-      style: "mapbox://styles/mapbox/streets-v10",
+      style: `mapbox://styles/mapbox/${theme}-v11`,
     });
 
     this.#addMarkersToMap();
@@ -28,7 +42,9 @@ export default class extends Controller {
 
   #addMarkersToMap() {
     this.markersValue.forEach((marker) => {
-      const popup = marker.info_window_html ? new mapboxgl.Popup().setHTML(marker.info_window_html) : undefined;
+      const popup = marker.info_window_html
+        ? new mapboxgl.Popup().setHTML(marker.info_window_html)
+        : undefined;
 
       const customMarker = document.createElement("div");
       customMarker.innerHTML = marker.marker_html;
