@@ -6,8 +6,8 @@
     "@hotwired/turbo-rails": "^7.3.0",
     "@mapbox/mapbox-gl-geocoder": "^5.0.1",
     "@popperjs/core": "^2.11.6",
-    "flatpickr": "^4.6.13",
     "bootstrap": "^5.3.0-alpha1",
+    "flatpickr": "^4.6.13",
     "webpack": "^5.76.1",
     "webpack-cli": "^5.0.1"
   },
