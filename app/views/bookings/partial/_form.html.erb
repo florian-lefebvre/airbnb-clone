@@ -1,11 +1,6 @@
 <% creating = models.last.id.nil? %>
-<%#= simple_form_for models, html: { class: "card rounded p-3" } do |f| %>
-  <%#= f.input :start_date %>
-  <%#= f.input :end_date %>
-  <%#= f.submit creating ? "Send request" : "Update", class: "btn btn-primary" %>
-<%# end %>
 <%= simple_form_for models, data: { controller: 'flatpickr' } do |f| %>
   <%= f.input :start_date, as: :string, input_html: { data: { flatpickr_target: "startDate" } } %>
-  <%#= f.input :end_date, as: :string, input_html: { data: { flatpickr_target: "endDate" } } %>
-  <%= f.submit creating ? "Book this car" : "Update", class: "btn btn-primary" %>
-  <% end %>
+  <%= f.input  :end_date, as: :string, placeholder: "Select end date", input_html: { data: { flatpickr_target: "endDate" } } %>
+  <%= f.submit 'Book this car' %>
+<% end %>
