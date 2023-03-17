@@ -45,7 +45,7 @@
       <% else %>
         <ul class="list-group">
           <% @bookings.each do |booking| %>
-            <li class="list-group-item"><%= booking.start_date %> to <%= booking.end_date %></li>
+            <li class="list-group-item"><%= booking.start_date.strftime("%B %d, %Y") %> to <%= booking.end_date.strftime("%B %d, %Y") %></li>
           <% end %>
         </ul>
       <% end %>
