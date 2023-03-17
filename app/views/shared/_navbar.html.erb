@@ -1,4 +1,4 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon sticky-top">
+<div class="navbar navbar-expand-sm navbar-lewagon navbar-light fixed-top">
   <div class="container">
     <%= link_to "/", class: "navbar-brand" do %>
       <%= image_tag "logo.jpg" %>
@@ -6,7 +6,6 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <%= form_with url: cars_path, method: :get, class: "d-flex" do %>
       <%= text_field_tag :query,
         params[:query],
@@ -15,7 +14,6 @@
       %>
       <%= submit_tag "Search", class: "btn btn-primary" %>
     <% end %>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
@@ -39,6 +37,7 @@
             <%= link_to "Register", new_user_registration_path, class: "btn btn-primary" %>
           </li>
         <% end %>
+        <%= render "shared/theme_toggle" %>
       </ul>
     </div>
   </div>

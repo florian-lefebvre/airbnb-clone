@@ -5,3 +5,7 @@
   box-shadow: none;
   background-color: #F4F4F4;
 }
+
+[data-bs-theme="dark"] .mapboxgl-ctrl-geocoder {
+  background-color: #212529;
+}
