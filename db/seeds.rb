@@ -181,6 +181,7 @@ USERS.each do |user_attrs|
     car = Car.new(attributes)
     car.user = user
     car.photo.attach(io: current_car[:file], filename: "#{current_car[:model]}.jpg", content_type: "image/jpeg")
+    car.save
 
     i += 1
     puts "Creating #{user.full_name}'s car: #{car.model}"
